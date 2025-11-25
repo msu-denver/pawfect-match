@@ -22,6 +22,46 @@ As a [type of user], I want to [perform some task] so that I can [achieve some g
 Given that [context], when [some action is carried out] then [a set of observable outcomes should occur].
 ```
 
+## US #1 - User Authentication
+As a new user, I want to create an account so that I can access platform features based on my role.
+- Users can register with email, password, and user type (Admin or Adopter)
+- Passwords are securely hashed
+- Successful registration logs the user in and redirects to appropriate dashboard
+
+## US #2 – User Login
+As a registered user, I want to log into my account so that I can access my personalized dashboard.
+- Users can log in with email and password
+- Successful login redirects to role-appropriate dashboard (shelter vs adopter)
+- Failed login shows  error message
+
+## US #3 – View Shelter Dashboard
+As a shelter administrator, I want to see an overview of my shelter's pets and status so that I can manage operations efficiently.
+
+Dashboard shows:
+- List of pets with their current status (available, pending, adopted)
+- Easy access to "Add New Pet" functionality
+- Each pet has edit/remove options
+
+## US #4 – Add New Pet
+As a shelter administrator, I want to add new pets to the system so that potential adopters can browse them.
+
+- Shelter staff can access an "Add Pet" form
+- Form includes: name, species, breed, age, description, etc.
+- Pet is initially set to "available" status
+- After successful addition, redirect to pet list or dashboard
+
+## US #5 – Update Pet Status
+As a shelter administrator, I want to update a pet's adoption status so that the platform reflects current availability.
+
+- Shelter staff can change status between: available, pending, adopted
+- Status changes are reflected immediately in the system
+
+## US #6 – Remove Pet Listing
+As a shelter administrator, I want to remove pets from the system so that adopted or transferred animals no longer appear.
+- Remove button/option on pet management views
+- Success message after removal
+
+
 ## Sequence Diagram
 
 At least one **user story**, unrelated to user creation or authentication, must be detailed using a **sequence diagram**. A **sequence diagram** is a type of UML diagram that shows how objects interact in a particular scenario, emphasizing the order of messages exchanged between components over time. This helps visualize the flow of operations and the responsibilities of different parts of the system.
