@@ -6,8 +6,6 @@ Both shelter staff and prospective adopters can create accounts on the platform.
 
 Our target audience includes animal shelters and rescue organizations seeking an efficient online management system, as well as individuals and families looking to adopt pets through a streamlined digital platform.
 
-[Use Case Diagram - To be added]
-
 # Design
 
 ## User Stories
@@ -15,6 +13,8 @@ Our target audience includes animal shelters and rescue organizations seeking an
 Describe the **user stories** for the project, which are short, simple descriptions of a feature told from the perspective of the end user. Each **user story** should include clear **acceptance criteria** and a **point estimate**. The **user stories** must align with the **use case diagram** and should be labeled as US#1, US#2, and so on. We suggest creating a separate Markdown section for each **user story**. 
 
 Use the following template when writing your **user stories**. 
+
+User stories that need to be written up: Sign up, Authentication, Dashboard, Add and edit pet (just for admin), reserve meeting time, and removing pet when adopted.
 
 ```
 As a [type of user], I want to [perform some task] so that I can [achieve some goal].
@@ -66,9 +66,18 @@ As a shelter administrator, I want to remove pets from the system so that adopte
 
 At least one **user story**, unrelated to user creation or authentication, must be detailed using a **sequence diagram**. A **sequence diagram** is a type of UML diagram that shows how objects interact in a particular scenario, emphasizing the order of messages exchanged between components over time. This helps visualize the flow of operations and the responsibilities of different parts of the system.
 
+Used User story #4
+
+<img src="uml/sequence_add_pet.png" alt="Sequence Diagram - Add New Pet" width="900">
+
+
 ## Model 
 
 Include a **class diagram** that clearly describes the **model classes** used in the project and their associations. A **class diagram** is a UML diagram that represents the structure of the system by showing its classes, their attributes, methods, and the relationships between them (such as inheritance, aggregation, or composition). This helps visualize how the data and logic are organized within the application.
+
+<img src="uml/use_case_diagram.png" alt="Use Case Diagram" width="900">
+
+<img src="uml/class_diagram.png" alt="Class Diagram" width="900">
 
 # Development Process 
 
@@ -76,7 +85,9 @@ This section should describe, in general terms, how Scrum was applied in the pro
 
 |Sprint#|Goals|Start|End|Done|Observations|
 |---|---|---|---|---|---|
-|1|US#1, US#2, ...|mm/dd/23|mm/dd/23|US#1|...|
+|1|US#1, US#2, Project Setup, User Stories, UML Diagrams|11/19/25|11/28/25|In Progress|Initial sprint focused on authentication and project foundation|
+|2|US#3, US#4, US#5|11/29/25|12/05/25|Not Started|Dashboard and pet management features|
+|3|US#6, Testing, Documentation, Deployment|12/06/25|12/09/25|Not Started|Final features, test coverage, Docker deployment|
 
 As in Project 2, you should take notes on the major Scrum meetings: planning, daily scrums, review, and retrospective. These meetings are essential for tracking progress, identifying obstacles, and ensuring continuous improvement. Use the Scrum folder and the shared templates to record your notes in an organized and consistent manner.
 
