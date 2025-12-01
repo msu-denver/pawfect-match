@@ -4,8 +4,9 @@ Example test file demonstrating white-box and black-box testing.
 Author(s): Purple T-Pythons Team
 """
 
+from . import app
 import pytest
-from src.app import app, db
+from src.app import db
 
 
 @pytest.fixture
