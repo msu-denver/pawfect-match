@@ -48,4 +48,3 @@ def load_user(user_id):
     """Load user by ID for Flask-Login."""
     from src.app.models import User
     return User.query.get(int(user_id))
-

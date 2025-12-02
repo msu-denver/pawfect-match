@@ -19,22 +19,87 @@ def index():
     return render_template('index.html', pets=pets)
 
 
+@main.route('/login', methods=['GET', 'POST'])
+def login():
+    """User login route."""
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        user = User.query.filter_by(email=email).first()
+
+        if user and user.check_password(password):
+            login_user(user)
+            flash("Logged in successfully!", "success")
+            return redirect(url_for('main.dashboard'))
+        else:
+            flash("Invalid email or password.", "danger")
+            return redirect(url_for('main.login'))
+
+    return render_template('login.html')
+
+
+@main.route('/register', methods=['GET', 'POST'])
+def register():
+    """User registration route."""
+    if request.method == 'POST':
+        username = request.form.get('username')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        role = request.form.get('role') 
+
+        if not username or not email or not password:
+            flash("All fields are required.", "danger")
+            return redirect(url_for('main.register'))
+
+        existing_user = User.query.filter_by(email=email).first()
+        if existing_user:
+            flash("Email already registered.", "danger")
+            return redirect(url_for('main.register'))
+
+        new_user = User(
+            username=username,
+            email=email,
+            is_admin=(role == "admin")
+        )
+        new_user.set_password(password)
+
+        db.session.add(new_user)
+        db.session.commit()
+
+        login_user(new_user)
+        flash("Account created successfully!", "success")
+        return redirect(url_for('main.dashboard'))
+
+    return render_template('register.html')
+
+
+@main.route('/logout')
+@login_required
+def logout():
+    """User logout route."""
+    logout_user()
+    flash('You have been logged out.')
+    return redirect(url_for('main.index'))
+
+
 @main.route('/dashboard')
-# @login_required  # Temporarily disabled for testing
+@login_required
 def dashboard():
     """Dashboard showing different views for admin vs adopter."""
-    # TODO: Uncomment @login_required after authentication is implemented
-    # TEMPORARY: Default to admin view for testing
     pets = Pet.query.all()
-    return render_template('admin_dashboard.html', pets=pets)
+    if current_user.is_admin:
+        return render_template('admin_dashboard.html', pets=pets)
+    else:
+        pets = Pet.query.filter_by(status='available').all()
+        return render_template('adopter_dashboard.html', pets=pets)
 
 
 @main.route('/pet/add', methods=['GET', 'POST'])
-# @login_required  # Temporarily disabled for testing
+@login_required
 def add_pet():
     """Add a new pet (admin only)."""
-    # TODO: Uncomment @login_required after authentication is implemented
-    if current_user.is_authenticated and not current_user.is_admin:
+    if not current_user.is_admin:
         flash('Only admins can add pets.', 'danger')
         return redirect(url_for('main.dashboard'))
     
@@ -59,11 +124,10 @@ def add_pet():
 
 
 @main.route('/pet/<int:pet_id>/edit', methods=['GET', 'POST'])
-# @login_required  # Temporarily disabled for testing
+@login_required
 def edit_pet(pet_id):
     """Edit pet details (admin only)."""
-    # TODO: Uncomment @login_required after authentication is implemented
-    if current_user.is_authenticated and not current_user.is_admin:
+    if not current_user.is_admin:
         flash('Only admins can edit pets.', 'danger')
         return redirect(url_for('main.dashboard'))
     
@@ -82,4 +146,3 @@ def edit_pet(pet_id):
         return redirect(url_for('main.dashboard'))
     
     return render_template('edit_pet.html', pet=pet)
-
