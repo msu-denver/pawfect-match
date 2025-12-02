@@ -10,7 +10,6 @@ class User {
   --
   + set_password(password : String) : void
   + check_password(password : String) : Boolean
-  + __repr__() : String
 }
 
 class Pet {
@@ -25,7 +24,6 @@ class Pet {
   - shelter_id : Integer
   --
   + update_status(new_status : String) : void
-  + __repr__() : String
 }
 
 class Appointment {
@@ -38,17 +36,13 @@ class Appointment {
   --
   + cancel() : void
   + confirm() : void
-  + __repr__() : String
 }
 
 User "1" -- "0..*" Pet : manages >
 User "1" -- "0..*" Appointment : books >
 Pet "1" -- "0..*" Appointment : has >
 
-note right of User
-  UserMixin provides Flask-Login
-  authentication methods
-end note
+
 
 note right of Pet
   Status values: 
