@@ -10,6 +10,9 @@ from flask_login import LoginManager
 import os
 from dotenv import load_dotenv
 
+# Load environment variables
+load_dotenv()
+
 # Initialize extensions
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -17,7 +20,7 @@ login_manager = LoginManager()
 
 def create_app():
     """Create and configure the Flask application."""
-    load_dotenv()
+
     
     app = Flask(__name__)
     

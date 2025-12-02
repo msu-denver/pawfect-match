@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<h1>Admin Dashboard</h1>
+<p><a href="{{ url_for('main.add_pet') }}">Add New Pet</a></p>
+
+<h2>All Pets</h2>
+{% if pets %}
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Species</th>
+            <th>Breed</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Spayed/Neutered</th>
+            <th>Vaccinated</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        {% for pet in pets %}
+        <tr>
+            <td>{{ pet.name }}</td>
+            <td>{{ pet.species }}</td>
+            <td>{{ pet.breed or 'N/A' }}</td>
+            <td>{{ pet.age or 'N/A' }}</td>
+            <td>{{ pet.gender or 'N/A' }}</td>
+            <td>{{ 'Yes' if pet.spayed_neutered else 'No' }}</td>
+            <td>{{ 'Yes' if pet.vaccinated else 'No' }}</td>
+            <td>{{ pet.status }}</td>
+            <td>
+                <a href="{{ url_for('main.edit_pet', pet_id=pet.id) }}">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No pets yet.</p>
+{% endif %}
+{% endblock %}

@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}PawFect Match{% endblock %}
+{% block title %}Available Pets{% endblock %}
 
 {% block content %}
-<h1>Welcome to PawFect Match</h1>
-<p>Find your perfect pet companion!</p>
+<h1>Available Pets for Adoption</h1>
 
 {% if pets %}
     {% for pet in pets %}
@@ -26,4 +25,3 @@
     <p>No pets available at this time.</p>
 {% endif %}
 {% endblock %}
-

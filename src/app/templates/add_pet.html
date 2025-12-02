@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Add Pet{% endblock %}
+
+{% block content %}
+<h2>Add New Pet</h2>
+<form method="POST">
+    <p>Pet Name: <input type="text" name="name" required></p>
+    
+    <p>Species: 
+    <select name="species" required>
+        <option value="">Select...</option>
+        <option value="Dog">Dog</option>
+        <option value="Cat">Cat</option>
+    </select>
+    </p>
+    
+    <p>Breed: <input type="text" name="breed"></p>
+    
+    <p>Age (years): <input type="number" name="age" min="0"></p>
+    
+    <p>Gender:
+    <select name="gender">
+        <option value="">Select...</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+    </select>
+    </p>
+    
+    <p>
+        <input type="checkbox" name="spayed_neutered" id="spayed_neutered">
+        <label for="spayed_neutered">Spayed/Neutered</label>
+    </p>
+    
+    <p>
+        <input type="checkbox" name="vaccinated" id="vaccinated">
+        <label for="vaccinated">Vaccinated</label>
+    </p>
+    
+    <p>Description:<br>
+    <textarea name="description" rows="4" cols="50"></textarea></p>
+    
+    <p>Image URL: <input type="text" name="image_url" size="50" placeholder="https://example.com/pet.jpg"></p>
+    
+    <p>
+        <button type="submit">Add Pet</button>
+        <a href="{{ url_for('main.dashboard') }}">Cancel</a>
+    </p>
+</form>
+{% endblock %}
