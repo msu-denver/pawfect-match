@@ -33,10 +33,12 @@ def create_app():
     # Initialize extensions with app
     db.init_app(app)
     login_manager.init_app(app)
-    login_manager.login_view = 'main.index'
+    login_manager.login_view = 'main.register'
+    login_manager.login_message = 'Please register or log in to view available pets.'
+    login_manager.login_message_category = 'info'
     
     # Register blueprints
-    from src.app.routes import main
+    from .routes import main
     app.register_blueprint(main)
     
     # Create database tables
@@ -49,5 +51,5 @@ def create_app():
 @login_manager.user_loader
 def load_user(user_id):
     """Load user by ID for Flask-Login."""
-    from src.app.models import User
+    from .models import User
     return User.query.get(int(user_id))

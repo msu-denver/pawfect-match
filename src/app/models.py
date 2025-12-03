@@ -6,7 +6,7 @@ Author(s): Purple T-Pythons Team
 
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-from src.app import db
+from . import db
 from datetime import datetime
 
 
@@ -33,7 +33,7 @@ class Pet(db.Model):
     name = db.Column(db.String(100), nullable=False)
     species = db.Column(db.String(50), nullable=False)  # Dog or Cat
     breed = db.Column(db.String(100))
-    age = db.Column(db.Integer)
+    age = db.Column(db.String(50))  # e.g., "1 year", "3 months"
     gender = db.Column(db.String(10))  # Male or Female
     spayed_neutered = db.Column(db.Boolean, default=False)
     vaccinated = db.Column(db.Boolean, default=False)

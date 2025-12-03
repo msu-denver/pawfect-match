@@ -33,8 +33,15 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="age" class="form-label">Age (years)</label>
-                        <input type="number" class="form-control" id="age" name="age" value="{{ pet.age or '' }}" min="0">
+                        <label class="form-label">Age</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="number" class="form-control" name="age_value" value="{{ age_value }}" min="0" step="1" style="width: 120px;" placeholder="#">
+                            <select class="form-select" name="age_unit" style="width: 150px;">
+                                <option value="">Select unit...</option>
+                                <option value="months" {% if age_unit == 'months' %}selected{% endif %}>Months</option>
+                                <option value="years" {% if age_unit == 'years' %}selected{% endif %}>Years</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="mb-3">

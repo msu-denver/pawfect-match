@@ -17,7 +17,14 @@
     
     <p>Breed: <input type="text" name="breed"></p>
     
-    <p>Age (years): <input type="number" name="age" min="0"></p>
+    <p>Age: 
+        <input type="number" name="age_value" min="0" step="1" style="width: 80px;">
+        <select name="age_unit">
+            <option value="">Select unit...</option>
+            <option value="months">Months</option>
+            <option value="years">Years</option>
+        </select>
+    </p>
     
     <p>Gender:
     <select name="gender">
@@ -40,7 +47,7 @@
     <p>Description:<br>
     <textarea name="description" rows="4" cols="50"></textarea></p>
     
-    <p>Image URL: <input type="text" name="image_url" size="50" placeholder="https://example.com/pet.jpg"></p>
+    <p>Image URL: <input type="text" name="image_url" size="50" placeholder="https://example.com/pet.jpg"> <em>(Supported: .jpg, .png, .gif)</em></p>
     
     <p>
         <button type="submit">Add Pet</button>

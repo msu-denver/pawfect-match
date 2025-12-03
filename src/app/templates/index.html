@@ -3,27 +3,37 @@
 {% block title %}PawFect Match{% endblock %}
 
 {% block content %}
-<h1>Welcome to PawFect Match</h1>
-<p>Find your perfect pet companion!</p>
+<h1>Welcome to PawFect Match! 🐾</h1>
 
-{% if pets %}
-    {% for pet in pets %}
-    <div class="pet-box">
-        {% if pet.image_url %}
-            <img src="{{ pet.image_url }}" alt="{{ pet.name }}">
-        {% endif %}
-        <h3>{{ pet.name }}</h3>
-        <p><strong>Species:</strong> {{ pet.species }}</p>
-        {% if pet.breed %}<p><strong>Breed:</strong> {{ pet.breed }}</p>{% endif %}
-        {% if pet.age %}<p><strong>Age:</strong> {{ pet.age }} years old</p>{% endif %}
-        {% if pet.gender %}<p><strong>Gender:</strong> {{ pet.gender }}</p>{% endif %}
-        <p><strong>Spayed/Neutered:</strong> {{ 'Yes' if pet.spayed_neutered else 'No' }}</p>
-        <p><strong>Vaccinated:</strong> {{ 'Yes' if pet.vaccinated else 'No' }}</p>
-        {% if pet.description %}<p>{{ pet.description }}</p>{% endif %}
+<div style="max-width: 800px; margin: 20px auto;">
+    <h2>Our Mission</h2>
+    <p>At PawFect Match, we believe every pet deserves a loving home. Our goal is to connect caring families with wonderful dogs and cats looking for their forever homes. Whether you're looking for a playful puppy, a loyal adult dog, a cuddly kitten, or a calm senior cat, we're here to help you find your perfect companion.</p>
+    
+    <div style="text-align: center; margin: 30px 0; display: flex; gap: 20px; justify-content: center;">
+        <img src="{{ url_for('static', filename='images/dog.jpg') }}" alt="Dog" style="max-width: 300px; height: 300px; object-fit: cover; border-radius: 10px;">
+        <img src="{{ url_for('static', filename='images/cat.jpg') }}" alt="Cat" style="max-width: 300px; height: 300px; object-fit: cover; border-radius: 10px;">
     </div>
-    {% endfor %}
-{% else %}
-    <p>No pets available at this time.</p>
-{% endif %}
+    
+    <h2>Find Your New Best Friend</h2>
+    <p>Browse our available pets by species:</p>
+    
+    <div style="display: flex; gap: 20px; margin: 30px 0; justify-content: center;">
+        <div style="border: 2px solid #ddd; padding: 20px; text-align: center; width: 250px;">
+            <h3>🐕 Dogs</h3>
+            <p>Loyal, loving, and ready to play!</p>
+            <a href="{{ url_for('main.view_dogs') }}"><button>View All Dogs</button></a>
+        </div>
+        
+        <div style="border: 2px solid #ddd; padding: 20px; text-align: center; width: 250px;">
+            <h3>🐈 Cats</h3>
+            <p>Independent, affectionate companions!</p>
+            <a href="{{ url_for('main.view_cats') }}"><button>View All Cats</button></a>
+        </div>
+    </div>
+    
+    <p style="text-align: center; margin-top: 40px;">
+        <em>Ready to adopt? <a href="{{ url_for('main.register') }}">Create an account</a> to get started!</em>
+    </p>
+</div>
 {% endblock %}
 

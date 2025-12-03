@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}Available Pets{% endblock %}
+{% block title %}{{ species }} - PawFect Match{% endblock %}
 
 {% block content %}
-<h1>Available Pets for Adoption</h1>
+<h1>Available {{ species }}</h1>
+<p><a href="{{ url_for('main.index') }}">← Back to Home</a></p>
 
 {% if pets %}
     {% for pet in pets %}
@@ -13,8 +14,7 @@
         {% endif %}
         <h3>{{ pet.name }}</h3>
         {% if pet.description %}<p>{{ pet.description }}</p>{% endif %}
-        <p><strong>Species:</strong> {{ pet.species }}</p>
-        {% if pet.breed %}<p><strong>Breed:</strong> {{ pet.breed }}</p>{% endif %}
+        <p><strong>Breed:</strong> {{ pet.breed or 'Mixed' }}</p>
         {% if pet.age %}<p><strong>Age:</strong> {{ pet.age }} old</p>{% endif %}
         {% if pet.gender %}<p><strong>Gender:</strong> {{ pet.gender }}</p>{% endif %}
         <p><strong>Spayed/Neutered:</strong> {{ 'Yes' if pet.spayed_neutered else 'No' }}</p>
@@ -22,6 +22,6 @@
     </div>
     {% endfor %}
 {% else %}
-    <p>No pets available at this time.</p>
+    <p>No {{ species.lower() }} available at this time. Check back soon!</p>
 {% endif %}
 {% endblock %}
