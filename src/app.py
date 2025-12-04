@@ -4,7 +4,7 @@ Main application entry point.
 Author(s): Purple T-Pythons Team
 """
 
-from src.app import create_app
+from app import create_app
 
 app = create_app()
 
