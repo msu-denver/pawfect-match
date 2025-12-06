@@ -17,45 +17,27 @@ class Pet {
   - name : String
   - species : String
   - breed : String
-  - age : Integer
+  - age : String
+  - gender : String
+  - spayed_neutered : Boolean
+  - vaccinated : Boolean
   - description : Text
   - status : String
+  - image_url : String
   - created_at : DateTime
-  - shelter_id : Integer
+  - updated_at : DateTime
   --
-  + update_status(new_status : String) : void
 }
-
-class Appointment {
-  - id : Integer
-  - pet_id : Integer
-  - adopter_id : Integer
-  - meeting_datetime : DateTime
-  - status : String
-  - notes : Text
-  --
-  + cancel() : void
-  + confirm() : void
-}
-
-User "1" -- "0..*" Pet : manages >
-User "1" -- "0..*" Appointment : books >
-Pet "1" -- "0..*" Appointment : has >
-
-
 
 note right of Pet
   Status values: 
   - available
   - pending
   - adopted
-end note
-
-note right of Appointment
-  Status values:
-  - scheduled
-  - completed
-  - cancelled
+  
+  Species: Dog or Cat
+  Gender: Male or Female
+  Age: e.g. "1 year", "3 months"
 end note
 
 @enduml

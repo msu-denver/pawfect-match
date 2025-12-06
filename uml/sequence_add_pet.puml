@@ -3,30 +3,30 @@ title US#4 - Add New Pet Sequence Diagram
 
 actor "Shelter Admin" as admin
 participant "Browser" as browser
-participant "Routes\n(routes.py)" as routes
-participant "Pet Model\n(models.py)" as model
+participant "Routes" as routes
 participant "Database" as db
 
 admin -> browser: Click "Add New Pet"
-browser -> routes: GET /add-pet
-routes --> browser: Render add_pet.html form
+browser -> routes: GET /pet/add
 
-admin -> browser: Fill pet details\n(name, species, breed, age, etc.)
-admin -> browser: Submit form
-
-browser -> routes: POST /add-pet\n(pet data)
-routes -> routes: Validate form data
-
-alt Valid Data
-    routes -> model: Create Pet object\nwith status="available"
-    model -> model: set_attributes()
-    routes -> db: Save Pet to database
-    db --> routes: Success confirmation
-    routes --> browser: Redirect to dashboard\nwith success message
-    browser --> admin: Show dashboard\nwith new pet listed
-else Invalid Data
-    routes --> browser: Render form\nwith error messages
-    browser --> admin: Show validation errors
+alt User is Admin
+    routes --> browser: render_template('add_pet.html')
+    
+    admin -> browser: Fill and submit form
+    browser -> routes: POST /pet/add (form data)
+    
+    routes -> routes: Format age from age_value + age_unit
+    routes -> routes: Create Pet object
+    routes -> db: db.session.add(pet)
+    routes -> db: db.session.commit()
+    routes -> routes: flash('Pet {name} added successfully!')
+    routes --> browser: redirect(url_for('main.dashboard'))
+    browser --> admin: Show dashboard with success message
+    
+else User is Not Admin
+    routes -> routes: flash('Only admins can add pets.')
+    routes --> browser: redirect(url_for('main.dashboard'))
+    browser --> admin: Show dashboard with error
 end
 
 @enduml
