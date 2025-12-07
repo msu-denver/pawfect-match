@@ -206,6 +206,22 @@ def edit_pet(pet_id):
     
     return render_template('edit_pet.html', pet=pet, age_value=age_value, age_unit=age_unit)
 
+# Add delete pet route
+@main.route('/pet/<int:pet_id>/delete', methods=['POST'])
+@login_required
+def delete_pet(pet_id):
+    """Delete a pet (admin only)."""
+    if not current_user.is_admin:
+        flash('Only admins can delete pets.', 'danger')
+        return redirect(url_for('main.dashboard'))
+
+    pet = Pet.query.get_or_404(pet_id)
+
+    db.session.delete(pet)
+    db.session.commit()
+
+    flash(f'Pet {pet.name} has been removed.', 'success')
+    return redirect(url_for('main.dashboard'))
 
 @main.route('/dogs')
 @login_required
