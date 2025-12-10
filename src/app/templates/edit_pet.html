@@ -48,7 +48,8 @@
                         <label for="status" class="form-label">Status *</label>
                         <select class="form-select" id="status" name="status" required>
                             <option value="available" {% if pet.status == 'available' %}selected{% endif %}>Available</option>
-                            <option value="process of adoption" {% if pet.status == 'process of adoption' %}selected{% endif %}>Process of Adoption</option>
+                            <option value="pending" {% if pet.status == 'pending' %}selected{% endif %}>Pending</option>
+                            <option value="adopted" {% if pet.status == 'adopted' %}selected{% endif %}>Adopted</option>
                         </select>
                     </div>
 

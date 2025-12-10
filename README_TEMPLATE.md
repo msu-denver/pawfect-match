@@ -14,27 +14,25 @@ Describe the **user stories** for the project, which are short, simple descripti
 
 Use the following template when writing your **user stories**. 
 
-User stories that need to be written up: Sign up, Authentication, Dashboard, Add and edit pet (just for admin), reserve meeting time, and removing pet when adopted.
-
 ```
 As a [type of user], I want to [perform some task] so that I can [achieve some goal].
 
 Given that [context], when [some action is carried out] then [a set of observable outcomes should occur].
 ```
 
-## US #1 - User Authentication
+## US #1 - User Authentication (5 points)
 As a new user, I want to create an account so that I can access platform features based on my role.
 - Users can register with email, password, and user type (Admin or Adopter)
 - Passwords are securely hashed
 - Successful registration logs the user in and redirects to appropriate dashboard
 
-## US #2 – User Login
+## US #2 – User Login (3 points)
 As a registered user, I want to log into my account so that I can access my personalized dashboard.
 - Users can log in with email and password
 - Successful login redirects to role-appropriate dashboard (shelter vs adopter)
 - Failed login shows  error message
 
-## US #3 – View Shelter Dashboard
+## US #3 – View Shelter Dashboard (3 points)
 As a shelter administrator, I want to see an overview of my shelter's pets and status so that I can manage operations efficiently.
 
 Dashboard shows:
@@ -42,7 +40,7 @@ Dashboard shows:
 - Easy access to "Add New Pet" functionality
 - Each pet has edit/remove options
 
-## US #4 – Add New Pet
+## US #4 – Add New Pet (5 points)
 As a shelter administrator, I want to add new pets to the system so that potential adopters can browse them.
 
 - Shelter staff can access an "Add Pet" form
@@ -50,13 +48,13 @@ As a shelter administrator, I want to add new pets to the system so that potenti
 - Pet is initially set to "available" status
 - After successful addition, redirect to pet list or dashboard
 
-## US #5 – Update Pet Status
+## US #5 – Update Pet Status (3 points)
 As a shelter administrator, I want to update a pet's adoption status so that the platform reflects current availability.
 
 - Shelter staff can change status between: available, pending, adopted
 - Status changes are reflected immediately in the system
 
-## US #6 – Remove Pet Listing
+## US #6 – Remove Pet Listing (2 points)
 As a shelter administrator, I want to remove pets from the system so that adopted or transferred animals no longer appear.
 - Remove button/option on pet management views
 - Success message after removal
@@ -91,8 +89,87 @@ This section should describe, in general terms, how Scrum was applied in the pro
 
 As in Project 2, you should take notes on the major Scrum meetings: planning, daily scrums, review, and retrospective. These meetings are essential for tracking progress, identifying obstacles, and ensuring continuous improvement. Use the Scrum folder and the shared templates to record your notes in an organized and consistent manner.
 
-Embed an image of the burndown chart here. 
+## Burndown Chart
+
+<img src="scrum/burndown_chart.png" alt="Burndown Chart" width="700"> 
 
 # Testing 
 
-In this section, share the results of the tests performed to verify the quality of the developed product, including the test coverage relative to the written code. Test coverage indicates how much of your code is exercised by tests, helping assess reliability. There is no minimum coverage requirement, but ensure there is at least some coverage through one white-box test (which examines internal logic and structure) and one black-box test (which validates functionality from the user’s perspective).
+In this section, share the results of the tests performed to verify the quality of the developed product, including the test coverage relative to the written code. Test coverage indicates how much of your code is exercised by tests, helping assess reliability. There is no minimum coverage requirement, but ensure there is at least some coverage through one white-box test (which examines internal logic and structure) and one black-box test (which validates functionality from the user's perspective).
+
+## Test Coverage Report
+
+We implemented comprehensive testing using both white-box and black-box testing methodologies to ensure code quality and reliability.
+
+### Test Summary
+- **Total Tests**: 15 (all passing)
+- **Black-box Tests**: 10 tests in `tests/test_add_pet_black_box.py`
+- **White-box Tests**: 5 tests in `tests/test_app.py`
+- **Overall Coverage**: 70%
+
+### Coverage Details
+```
+Name                  Stmts   Miss  Cover   Missing
+---------------------------------------------------
+src\app.py                4      4     0%   7-12
+src\app\__init__.py      28      0   100%
+src\app\models.py        30      1    97%   47
+src\app\routes.py       151     59    61%   18, 38, 41-44, 51-90, 99-101, 152, 160-161, 173, 189-207, 215-216, 230-231, 238-239
+---------------------------------------------------
+TOTAL                   213     64    70%
+```
+
+### Black-box Testing
+Our black-box tests (`test_add_pet_black_box.py`) validate the pet addition functionality from a user perspective, testing:
+- Valid pet creation with complete data
+- Age formatting (years, months, weeks)
+- Special character handling in pet names and descriptions
+- Multiple pet additions
+- Non-admin access restrictions
+- Authentication requirements
+
+### White-box Testing
+Our white-box tests (`test_app.py`) examine internal implementation logic, covering:
+- Pet model database operations
+- Add pet route functionality
+- Edit pet route with age reformatting
+- Delete pet route
+- Dashboard display functionality
+
+The HTML coverage report is available in the `htmlcov/` directory.
+
+# Deployment
+
+The application is containerized using Docker for easy deployment and consistent execution across different environments.
+
+## Docker Deployment
+
+### Prerequisites
+- Docker Desktop installed and running
+
+### Building the Docker Image
+```bash
+docker build -t pawfect-match .
+```
+
+### Running the Container
+```bash
+docker run -d -p 5000:5000 --name pawfect-app pawfect-match
+```
+
+The application will be available at `http://localhost:5000`
+
+### Managing the Container
+```bash
+# View running containers
+docker ps
+
+# Stop the container
+docker stop pawfect-app
+
+# Remove the container
+docker rm pawfect-app
+
+# View logs
+docker logs pawfect-app
+```
