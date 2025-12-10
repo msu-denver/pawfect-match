@@ -15,7 +15,7 @@ The project should be organized in a separate GitHub public repository that you 
 To preserve code quality, the **main** branch must be protected and require a code review before any pull request is approved. This workflow promotes stability, accountability, and best practices in version control.
 
 ```
-Share the URL of your project's GitHub repository here.
+https://github.com/msu-denver/pawfect-match
 ```
 
 The repository should have, at a minimum, the following structure:
